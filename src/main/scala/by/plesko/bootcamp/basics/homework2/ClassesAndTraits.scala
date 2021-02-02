@@ -80,21 +80,6 @@ object ClassesAndTraits {
     def volume: Option[Double]
   }
 
-  final case class Origin() extends Shape3D {
-    override def x: Double = 0
-    override def y: Double = 0
-    override def z: Double = 0
-    override def minX: Double = x
-    override def maxX: Double = x
-    override def minY: Double = y
-    override def maxY: Double = y
-    override def minZ: Double = z
-    override def maxZ: Double = z
-    override def surfaceArea: Option[Double] = None
-    override def volume: Option[Double] = None
-    override def move(dx: Double, dy: Double, dz: Double): Origin = ???
-  }
-
   final case class Point3D(x: Double, y: Double, z: Double) extends Shape3D {
     override def minX: Double = x
     override def maxX: Double = x
@@ -104,7 +89,7 @@ object ClassesAndTraits {
     override def maxZ: Double = z
     override def surfaceArea: Option[Double] = None
     override def volume: Option[Double] = None
-    override def move(dx: Double, dy: Double, dz: Double): Origin = ???
+    override def move(dx: Double, dy: Double, dz: Double): Point3D = Point3D(x + dx, y + dy, z + dz)
   }
 
   final case class Sphere(centerX: Double, centerY: Double, centerZ: Double, radius: Double) extends Shape3D {

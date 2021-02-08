@@ -1,8 +1,7 @@
 package by.plesko.bootcamp.basics.homework3
 
-import scala.Option
 import scala.io.Source
-import scala.util.{Failure, Success, Try}
+import scala.util.Try
 
 object ControlStructuresHomework {
 

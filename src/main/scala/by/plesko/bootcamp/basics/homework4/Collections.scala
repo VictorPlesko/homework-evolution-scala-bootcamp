@@ -5,5 +5,8 @@ object Collections {
     nums.foldLeft(Array.empty[Int])((acc, x) => acc :+ x + acc.lastOption.getOrElse(0))
   }
 
+  def shuffle(nums: Array[Int], n: Int): Array[Int] = {
+    nums.indices.take(n).flatMap(i => Array(nums(i), nums(i + n))).toArray
+  }
 
 }

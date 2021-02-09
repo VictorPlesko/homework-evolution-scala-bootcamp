@@ -9,4 +9,7 @@ object Collections {
     nums.indices.take(n).flatMap(i => Array(nums(i), nums(i + n))).toArray
   }
 
+  def maximumWealth(accounts: Array[Array[Int]]): Int = {
+    accounts.foldLeft(Int.MinValue)((maxWealth, acc) => maxWealth max acc.sum)
+  }
 }

@@ -23,4 +23,14 @@ object Collections {
       if (candies.forall(_ <= candy + extraCandies)) res :+ true else res :+ false)
   }
 
+  // https://leetcode.com/problems/widest-vertical-area-between-two-points-containing-no-points
+  def maxWidthOfVerticalArea(points: Array[Array[Int]]): Int = {
+    val sortedPoints = points.sortBy(_.head)
+    val pairPoints = sortedPoints zip sortedPoints.tail
+    pairPoints.foldLeft(Int.MinValue){
+      case (maxArea, (point1, point2)) => maxArea max point2.head - point1.head
+    }
+  }
+
+
 }

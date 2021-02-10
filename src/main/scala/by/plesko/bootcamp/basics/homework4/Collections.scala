@@ -27,9 +27,19 @@ object Collections {
   def maxWidthOfVerticalArea(points: Array[Array[Int]]): Int = {
     val sortedPoints = points.sortBy(_.head)
     val pairPoints = sortedPoints zip sortedPoints.tail
-    pairPoints.foldLeft(Int.MinValue){
+    pairPoints.foldLeft(Int.MinValue) {
       case (maxArea, (point1, point2)) => maxArea max point2.head - point1.head
     }
+  }
+
+  // https://leetcode.com/problems/maximum-nesting-depth-of-the-parentheses/
+  def maxDepth(s: String): Int = {
+    s.foldLeft(0, 0) {
+      case ((maxDepth, acc), symbol) =>
+        if (symbol == '(') (maxDepth max acc + 1, acc + 1)
+        else if (symbol == ')') (maxDepth, acc - 1)
+        else (maxDepth, acc)
+    }._1
   }
 
 

@@ -1,5 +1,7 @@
 package by.plesko.bootcamp.basics.homework4
 
+import scala.annotation.tailrec
+
 object Collections {
 
   // https://leetcode.com/problems/running-sum-of-1d-array/
@@ -42,5 +44,46 @@ object Collections {
     }._1
   }
 
+  // Tasks from the lecture
+
+  def scanLeft[T](zero: T)(list: List[T])(f: (T, T) => T): List[T] = {
+
+    @tailrec
+    def go(listResidue: List[T], listAcc: List[T]): List[T] = {
+      if (listResidue == Nil) listAcc
+      else go(listResidue.tail, listAcc :+ f(listAcc.last, listResidue.head))
+    }
+
+    go(list, List(zero))
+  }
+
+  def count(s: String): List[(Char, Int)] = {
+    s.foldLeft(List.empty[(Char, Int)]) {
+      case (Nil, symbol) => Nil :+ (symbol, 1)
+      case (acc, symbol) =>
+        if (acc.last._1 == symbol) acc.updated(acc.length - 1, (symbol, acc.last._2 + 1)) else acc :+ (symbol, 1)
+    }
+  }
+
+  def min(list: List[Int]): Option[Int] = {
+    list match {
+      case Nil => None
+      case _   => Some(list.foldLeft(Int.MaxValue)((acc, x) => x min acc))
+    }
+
+    //list.reduceOption((a,b) => a min b)
+
+    /* @tailrec
+     def go(listRec: List[Int], min: Int): Int = {
+       if (listRec == Nil) min
+       else if (min < listRec.head) go(listRec.tail, min)
+       else go(listRec.tail, listRec.head)
+     }
+
+     list match {
+       case Nil => None
+       case _   => Some(go(list, Int.MaxValue))
+     }*/
+  }
 
 }

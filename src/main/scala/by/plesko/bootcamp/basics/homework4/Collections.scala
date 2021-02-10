@@ -44,6 +44,15 @@ object Collections {
     }._1
   }
 
+  // https://leetcode.com/problems/split-a-string-in-balanced-strings
+  def balancedStringSplit(s: String): Int = {
+    s.foldLeft(0,0) {
+      case ((maxAmount, res), symbol) =>
+        val curr = if (symbol == 'L') res + 1 else res - 1
+        if (curr == 0) (maxAmount + 1, curr) else (maxAmount, curr)
+    }._1
+  }
+
   // Tasks from the lecture
 
   def scanLeft[T](zero: T)(list: List[T])(f: (T, T) => T): List[T] = {

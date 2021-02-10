@@ -86,4 +86,66 @@ object Collections {
      }*/
   }
 
+
+  // Tasks from the "DataStructures" file
+
+  // Exercise. Write a function that checks if all values in a `List` are equal.
+  // Think about what you think your function should return if `list` is empty, and why.
+  def allEqual[T](list: List[T]): Boolean = {
+    list match {
+      case x if x.isEmpty => true
+      case x              => x.forall(_ == list.head)
+    }
+  }
+
+  val vegetableWeights = Map(
+    ("pumpkins", 10),
+    ("cucumbers", 20),
+    ("olives", 2),
+  )
+
+  val vegetablePrices = Map(
+    "tomatoes" -> 4,
+    "peppers" -> 5,
+    "olives" -> 17,
+  )
+
+  val vegetableAmounts = Map(
+    "tomatoes" -> 17,
+    "peppers" -> 234,
+    "olives" -> 32,
+    "cucumbers" -> 323,
+  )
+
+  // Exercise. Calculate the total cost of all vegetables, taking vegetable amounts (in units) from
+  // `vegetableAmounts` and prices per unit from `vegetablePrices`. Assume the price is 10 if not available
+  // in `vegetablePrices`.
+  val totalVegetableCost: Int = {
+    vegetableAmounts.foldLeft(0)((acc, x) => acc + x._2 * vegetablePrices.getOrElse(x._1, 10))
+  }
+
+  // Exercise. Given the vegetable weights (per 1 unit of vegetable) in `vegetableWeights` and vegetable
+  // amounts (in units) in `vegetableAmounts`, calculate the total weight per type of vegetable, if known.
+  //
+  // For example, the total weight of "olives" is 2 * 32 == 64.
+  val totalVegetableWeights: Map[String, Int] = { // implement here
+    for {
+      x <- vegetableWeights
+      if vegetableAmounts.contains(x._1)
+    } yield (x._1 -> x._2 * vegetableAmounts(x._1))
+  }
+
+  // Exercise: Return a set with all subsets of the provided set `set` with `n` elements
+  // For example, `allSubsetsOfSizeN(Set(1, 2, 3), 2) == Set(Set(1, 2), Set(2, 3), Set(1, 3))`.
+  // Hints for implementation:
+  //   - Handle the trivial case where `n == 1`.
+  //   - For other `n`, for each `set` element `elem`, generate all subsets of size `n - 1` from the set
+  //     that don't include `elem`, and add `elem` to them.
+  def allSubsetsOfSizeN[A](set: Set[A], n: Int): Set[Set[A]] = {
+    set.subsets(n).toSet
+  }
+
+  // Homework
+  def sortConsideringEqualValues[T](map: Map[T, Int]): List[(Set[T], Int)] =
+    map.groupBy(_._2).flatMap(x => List((x._2.keySet, x._1))).toList.sortBy(_._2)
 }

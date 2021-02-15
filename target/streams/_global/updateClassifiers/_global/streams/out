@@ -1,4 +1,4 @@
 [debug] not up to date. inChanged = true, force = false
-[debug] Updating ProjectRef(uri("file:/home/victor/Scala/Homework/"), "homework")...
-[debug] Done updating ProjectRef(uri("file:/home/victor/Scala/Homework/"), "homework")
+[debug] Updating ProjectRef(uri("file:/home/victor/Scala/homework-evolution-scala-bootcamp/"), "homework-evolution-scala-bootcamp")...
+[debug] Done updating ProjectRef(uri("file:/home/victor/Scala/homework-evolution-scala-bootcamp/"), "homework-evolution-scala-bootcamp")
 [warn] There may be incompatibilities among your library dependencies; run 'evicted' to see detailed eviction warnings.

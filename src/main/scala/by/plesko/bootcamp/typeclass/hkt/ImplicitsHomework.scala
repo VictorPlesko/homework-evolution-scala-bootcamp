@@ -153,7 +153,8 @@ object ImplicitsHomework {
       implicit def iterate2TypeSizeScore[F[_, _]: Iterate2, K: GetSizeScore, V: GetSizeScore]: GetSizeScore[F[K,V]] = new GetSizeScore[F[K,V]] {
         override def apply(value: F[K, V]): SizeScore = {
           val instance = implicitly[Iterate2[F]]
-          JVMObjectSizeScore + instance.iterator1(value).foldLeft(0)((acc, it) => acc + it.sizeScore) + instance.iterator2(value).foldLeft(0)((acc, it) => acc + it.sizeScore)
+          JVMObjectSizeScore + instance.iterator1(value).foldLeft(0)((acc, it) =>
+            acc + it.sizeScore) + instance.iterator2(value).foldLeft(0)((acc, it) => acc + it.sizeScore)
         }
       }
     }
@@ -192,11 +193,13 @@ object ImplicitsHomework {
     Return an implementation based on MutableBoundedCache[Long, Twit]
      */
     implicit val fbiNoteSizeScore: GetSizeScore[FbiNote] = new GetSizeScore[FbiNote] {
-      override def apply(value: FbiNote): SizeScore = JVMObjectSizeScore + value.month.sizeScore + value.favouriteChar.sizeScore + value.watchedPewDiePieTimes.sizeScore
+      override def apply(value: FbiNote): SizeScore =
+        JVMObjectSizeScore + value.month.sizeScore + value.favouriteChar.sizeScore + value.watchedPewDiePieTimes.sizeScore
     }
 
     implicit val twitNoteSizeScore: GetSizeScore[Twit] = new GetSizeScore[Twit] {
-      override def apply(value: Twit): SizeScore = JVMObjectSizeScore + value.id.sizeScore + value.userId.sizeScore + value.hashTags.sizeScore + value.attributes.sizeScore + value.fbiNotes.sizeScore
+      override def apply(value: Twit): SizeScore =
+        JVMObjectSizeScore + value.id.sizeScore + value.userId.sizeScore + value.hashTags.sizeScore + value.attributes.sizeScore + value.fbiNotes.sizeScore
     }
 
     def createTwitCache(maxSizeScore: SizeScore): TwitCache = new TwitCache {

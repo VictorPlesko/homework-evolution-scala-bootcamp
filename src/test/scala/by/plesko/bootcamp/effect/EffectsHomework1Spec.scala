@@ -5,6 +5,7 @@ import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks.forAll
 
+import scala.collection.mutable.ListBuffer
 import scala.util.{Failure, Success, Try}
 
 class EffectsHomework1Spec extends AnyFunSuite with Matchers {
@@ -20,9 +21,17 @@ class EffectsHomework1Spec extends AnyFunSuite with Matchers {
     }
   }
 
-  test("*> is working correctly") {
+  test("*> return last expression") {
     forAll { (x: Int, y: Int) =>
       (IO(x) *> IO(y)).unsafeRunSync() shouldBe y
+    }
+  }
+
+  test("*> performs several IO") {
+    forAll { (x: Int, y: Int) =>
+      val listBuffer = ListBuffer.empty[Int]
+      (IO(listBuffer += x) *> IO(listBuffer += y)).unsafeRunSync()
+      listBuffer.sum shouldBe x + y
     }
   }
 

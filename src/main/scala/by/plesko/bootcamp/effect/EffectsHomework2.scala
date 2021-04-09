@@ -120,6 +120,6 @@ object EffectsHomework2 extends IOApp {
     resources.use {
       case (filePath, descriptor, seed) =>
         contextShift.evalOn(executionContext)(calculateSignature(filePath, descriptor, seed))
-    } *> IO(executors.shutdown()) *> IO(ExitCode.Success)
+    }.guarantee(IO(executors.shutdown())) as ExitCode.Success
   }
 }

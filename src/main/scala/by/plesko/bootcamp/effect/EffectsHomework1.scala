@@ -30,11 +30,11 @@ object EffectsHomework1 {
   final class IO[A](private val run: () => A) {
     def map[B](f: A => B): IO[B] = new IO[B](() => f(run()))
 
-    def flatMap[B](f: A => IO[B]): IO[B] = f(run())
+    def flatMap[B](f: A => IO[B]): IO[B] = new IO(() => f(run()).run())
 
     def *>[B](another: IO[B]): IO[B] = flatMap(_ => another)
 
-    def as[B](newValue: => B): IO[B] = new IO(() => newValue)
+    def as[B](newValue: => B): IO[B] = map(_ => newValue)
 
     def void: IO[Unit] = new IO(() => ())
 
@@ -65,7 +65,7 @@ object EffectsHomework1 {
   object IO {
     def apply[A](body: => A): IO[A] = delay(body)
 
-    def suspend[A](thunk: => IO[A]): IO[A] = thunk
+    def suspend[A](thunk: => IO[A]): IO[A] = unit.flatMap(_ => thunk)
 
     def delay[A](body: => A): IO[A] = new IO(() => body)
 

@@ -1,4 +1,4 @@
-package by.plesko.bootcamp.db
+package by.plesko.bootcamp.db.config
 
 object DbConfig {
   val dbDriverName = "org.h2.Driver"

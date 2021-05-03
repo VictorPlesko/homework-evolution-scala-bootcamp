@@ -1,13 +1,14 @@
-package by.plesko.bootcamp.db
+package by.plesko.bootcamp.db.database_utils
 
-import by.plesko.bootcamp.cats.Monads.Monad
-import cats.effect.{Bracket, Effect, Sync}
-import doobie.{ConnectionIO, Fragment, Meta, Transactor}
-import doobie.implicits._
+import by.plesko.bootcamp.db.domain._
+import cats.effect.Effect
 import cats.implicits._
+import doobie.implicits._
 import doobie.implicits.javatime._
+import AdditionalMeta._
+import doobie.{ConnectionIO, Fragment, Meta, Transactor}
 
-import java.time.{LocalDate, Year}
+import java.time.Year
 import java.util.UUID
 
 object AdditionalMeta {
@@ -16,8 +17,6 @@ object AdditionalMeta {
 }
 
 object SQLCommand {
-
-  import AdditionalMeta._
 
   def insertAuthor(author: Author): ConnectionIO[Int] = {
     val sql = sql"INSERT INTO authors (id, `name`, birthday) VALUES(${author.id}, ${author.name}, ${author.birthday})"

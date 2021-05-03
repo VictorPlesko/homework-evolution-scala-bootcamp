@@ -1,4 +1,4 @@
-package by.plesko.bootcamp.db
+package by.plesko.bootcamp.db.domain
 
 import io.circe.generic.JsonCodec
 

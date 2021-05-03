@@ -1,4 +1,4 @@
-package by.plesko.bootcamp.db
+package by.plesko.bootcamp.db.database_utils
 
 import doobie.{ConnectionIO, Fragment}
 

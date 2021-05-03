@@ -1,18 +1,15 @@
-package by.plesko.bootcamp.db
+package by.plesko.bootcamp.db.http
 
-import by.plesko.bootcamp.db.AdditionalVar.UUIDQueryVar
+import by.plesko.bootcamp.db.database_utils.DbService
+import by.plesko.bootcamp.db.domain.{Author, AuthorWithoutID, Book, BookWithoutID}
+import by.plesko.bootcamp.db.http.AdditionalVar.UUIDQueryVar
 import cats.data.Validated
 import cats.effect.IO
-import org.http4s.HttpRoutes
-import org.http4s.dsl.impl.Root
-import io.circe.generic.auto._
-import org.http4s.implicits._
-import org.http4s._
-import org.http4s.headers._
-import org.http4s.dsl.io._
 import org.http4s.circe.CirceEntityCodec._
+import org.http4s.dsl.impl.Root
+import org.http4s.dsl.io._
+import org.http4s.{HttpRoutes, _}
 
-import java.time.{LocalDate, Year}
 import java.util.UUID
 
 object AdditionalVar {

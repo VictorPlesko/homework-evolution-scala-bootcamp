@@ -1,8 +1,9 @@
-package by.plesko.bootcamp.db
+package by.plesko.bootcamp.db.database_utils
 
-import cats.effect.{Blocker, ContextShift, Resource, Async}
-import doobie.hikari.HikariTransactor
+import by.plesko.bootcamp.db.config.DbConfig
+import cats.effect.{Async, Blocker, ContextShift, Resource}
 import doobie.{ExecutionContexts, Transactor}
+import doobie.hikari.HikariTransactor
 
 object DbTransactor {
   def transactor[F[_] : ContextShift : Async]: Resource[F, Transactor[F]] =
